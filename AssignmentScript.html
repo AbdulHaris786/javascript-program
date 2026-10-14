@@ -2,20 +2,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>count the number
-
-    </title>
+    <meta charset="UTF-8">
+    <title>Count the Number</title>
 </head>
 <body>
-<h2 id="number">10</h2>
-<button onclick="count()">Count</button>
-    <script>
-   let num = 10;
+    <h2 id="number">10</h2>
+    <button onclick="count()">Count</button>
 
- function count() {
- num = num + 1;
-   document.getElementById("number").innerHTML = num;   }
-   
-   </script>
+    <script>
+        let num = 10;
+
+        function count() {
+            num += 1;
+            document.getElementById("number").textContent = num;
+        }
+    </script>
 </body>
 </html>
