@@ -129,7 +129,8 @@ const members = [
     { id: 1, name: 'Arun', email: 'arun@gmail.com' },
     { id: 2, name: 'Priya', email: 'priya@gmail.com' },
     { id: 3, name: 'Karthik', email: 'karthik@gmail.com' },
-    { id: 4, name: 'Divya', email: 'divya@gmail.com' }
+    { id: 4, name: 'Divya', email: 'divya@gmail.com' },
+    { id: 5, name: 'Ravi', email: 'ravi@gmail.com' }
   ];
 return (
     <div>
