@@ -123,10 +123,12 @@
 import { useState, useEffect } from 'react';
 import bgImg from './assets/img.jpg';
 import Button from './components/button/button.jsx';
+
 function App() {
   const [members, setMembers] = useState([]);
   const [counter, setCounter] = useState(0);
-useEffect(() => {
+
+  useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/users')
       .then(res => res.json())
       .then(data => setMembers(data));
@@ -134,25 +136,48 @@ useEffect(() => {
 
   return (
     <div>
-      <h1 style={{ color: 'green' }}>Hello React</h1>
-<img src={bgImg} alt="Background" width="200" />
-<br /><br />
- <Button name="Hi there" click={() => alert('Hi')} />
- <h2>Member Details</h2>
- <table border="1" cellPadding="10">
+      <h1 style={{ color: 'grey' }}>Hello Members</h1>
+
+      <img src={bgImg} alt="Background" width="200" />
+
+      <br /><br />
+
+      <Button name="click me" click={() => alert('Hi')} />
+
+      <h2>Employee Details</h2>
+
+      <table border="1" cellPadding="8">
         <thead>
           <tr>
             <th>ID</th>
             <th>Name</th>
+            <th>Username</th>
             <th>Email</th>
+            <th>Phone</th>
+            <th>Website</th>
+            <th>Address</th>
+            <th>Company</th>
+            <th>Company Details</th>
           </tr>
         </thead>
- <tbody>
+
+        <tbody>
           {members.map(member => (
             <tr key={member.id}>
               <td>{member.id}</td>
               <td>{member.name}</td>
+              <td>{member.username}</td>
               <td>{member.email}</td>
+              <td>{member.phone}</td>
+              <td>{member.website}</td>
+
+              <td>
+                {member.address.street}, {member.address.suite},
+                {member.address.city}, {member.address.zipcode}
+              </td>
+
+              <td>{member.company.name}</td>
+              <td>{member.company.catchPhrase}</td>
             </tr>
           ))}
         </tbody>
@@ -161,13 +186,16 @@ useEffect(() => {
       <br />
 
       <h3>Counter: {counter}</h3>
-<button onClick={() => setCounter(counter + 1)}>
+
+      <button onClick={() => setCounter(counter + 1)}>
         Increment
       </button>
-<button onClick={() => setCounter(counter - 1)}>
+
+      <button onClick={() => setCounter(counter - 1)}>
         Decrement
       </button>
     </div>
   );
 }
+
 export default App;
