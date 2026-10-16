@@ -131,7 +131,8 @@ function App() {
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/users')
       .then(res => res.json())
-      .then(data => setMembers(data));
+      .then(data => setMembers(data))
+      .catch(error => console.log(error));
   }, []);
 
   return (
@@ -149,6 +150,7 @@ function App() {
       <table border="1" cellPadding="8">
         <thead>
           <tr>
+            <th>Photo</th>
             <th>ID</th>
             <th>Name</th>
             <th>Username</th>
@@ -164,12 +166,26 @@ function App() {
         <tbody>
           {members.map(member => (
             <tr key={member.id}>
+              <td>
+                <img
+                  src={`https://i.pravatar.cc/100?img=${member.id}`}
+                  alt={member.name}
+                  width="60"
+                  height="60"
+                  style={{ borderRadius: '50%' }}
+                />
+              </td>
+
               <td>{member.id}</td>
               <td>{member.name}</td>
               <td>{member.username}</td>
               <td>{member.email}</td>
               <td>{member.phone}</td>
-              <td>{member.website}</td>
+              <td>
+  <a href="https://www.google.com" target="_blank" rel="noopener noreferrer">
+  Google
+</a>
+</td>
 
               <td>
                 {member.address.street}, {member.address.suite},
