@@ -161,7 +161,21 @@ function App() {
     }))
 
   }
+const handleSubmit = (e) => {
+  e.preventDefault();
 
+  const newMembers = [...members];
+
+  newMembers.push({
+    id: members.length + 1,
+    name: form.firstName,
+    email: form.email,
+    phone: form.number,
+    age: form.age,
+  });
+
+  setMembers(newMembers);
+};
   return (
     <>
     <div>
@@ -169,6 +183,7 @@ function App() {
       <input name='email' placeholder='Email' value={form.email} onChange={handleChange} />
       <input name='age' placeholder='Age' value={form.age} onChange={handleChange} />
       <input type="tel"name="number"placeholder="Phone Number"value={form.number}onChange={handleChange}
+      
 />
     </div>
 
@@ -233,12 +248,13 @@ function App() {
 </td>
 
               <td>
-                {member.address.street}, {member.address.suite},
-                {member.address.city}, {member.address.zipcode}
+               {member.address
+  ? `${member.address.street}, ${member.address.suite}, ${member.address.city}, ${member.address.zipcode}`
+  : 'N/A'}
               </td>
 
-              <td>{member.company.name}</td>
-              <td>{member.company.catchPhrase}</td>
+              <td>{member.company?.name || 'N/A'}</td>
+<td>{member.company?.catchPhrase || 'N/A'}</td>
             </tr>
           ))}
         </tbody>
@@ -255,6 +271,7 @@ function App() {
       <button onClick={() => setCounter(counter - 1)}>
         Decrement
       </button>
+      <button onClick={handleSubmit}>Add Member</button>
     </div>
     </>
   );
