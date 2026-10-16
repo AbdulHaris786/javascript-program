@@ -127,15 +127,56 @@ import Button from './components/button/button.jsx';
 function App() {
   const [members, setMembers] = useState([]);
   const [counter, setCounter] = useState(0);
-
+  const [status,setStatus] = useState(0);
+  const [form,setForm]= useState({
+    firstName:"",
+    email:"",
+    age:"",
+    number:"",
+  })
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/users')
       .then(res => res.json())
-      .then(data => setMembers(data))
-      .catch(error => console.log(error));
+      .then(data => {
+        const formattedObj = {
+          data,
+          status: data.length > 0 ? 200 : 404
+        }
+        setMembers(formattedObj.data);
+        setStatus(formattedObj.status);
+      })
+      .catch(error => {
+  console.log(error);
+  setStatus(404);
+});
   }, []);
 
+  const handleChange=(e)=>{
+    console.log(e,"events")
+    const {name,value}=e.target;
+    setForm((prevForm)=>({
+      ...prevForm,
+      [name]:value
+
+    }))
+
+  }
+
   return (
+    <>
+    <div>
+      <input name='firstName' placeholder='First Name' value={form.firstName} onChange={handleChange} />
+      <input name='email' placeholder='Email' value={form.email} onChange={handleChange} />
+      <input name='age' placeholder='Age' value={form.age} onChange={handleChange} />
+      <input type="tel"name="number"placeholder="Phone Number"value={form.number}onChange={handleChange}
+/>
+    </div>
+
+
+
+
+
+
     <div>
       <h1 style={{ color: 'grey' }}>Hello Members</h1>
 
@@ -143,9 +184,13 @@ function App() {
 
       <br /><br />
 
-      <Button name="click me" click={() => alert('Hi')} />
+      <Button name="click me" click={() => alert('Hello')} />
 
       <h2>Employee Details</h2>
+      <p>
+  {status === 200 ? 'Successfully fetched!' :
+   status === 404 ? 'Not found!' : 'Loading...'}
+</p>
 
       <table border="1" cellPadding="8">
         <thead>
@@ -211,7 +256,10 @@ function App() {
         Decrement
       </button>
     </div>
+    </>
   );
 }
 
 export default App;
+
+ 
